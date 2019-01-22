@@ -92,8 +92,10 @@ input[type=checkbox]:checked + label .item {
 }
 
 input[type=checkbox]:checked + label .x {  
-  opacity: 0;
-  transform: translate(-50px, -50%);
+  /* opacity: 0; */
+  /* transform: translate(-50px, -50%); */
+  background: #ff3f3f;
+  opacity: 1 !important;
 }
 
 .x {
@@ -117,5 +119,5 @@ input[type=checkbox]:checked + label .x {
 .box {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center
 }

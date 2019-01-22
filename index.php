@@ -55,9 +55,9 @@
             foreach ($items as $key => $item): 
         ?>
 
-            <input type="checkbox" name="checked" id="checked-<?php $key ?>">
+            <input type="checkbox" name="checked" id="checked-<?php echo $key ?>">
 
-            <label for="checked-<?php $key ?>">
+            <label for="checked-<?php echo $key ?>">
                 <div class="item">
                     <h2>
                         <?php echo $item['item']; ?>
