@@ -8,6 +8,33 @@
     <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+    <?php
+        require('config/conn.php');
+
+        $query = 'SELECT * FROM todo_test';
+
+        $result = mysqli_query($conn, $query);
+
+        $items  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+        mysqli_free_result($result);
+
+        if(isset($_POST['submit'])) {
+            $i = $_POST['item'];
+
+            $query_insert = "INSERT INTO todo_test(item) VALUES('$i')";
+
+            if(mysqli_query($conn, $query_insert)){
+                header('Location: '.$_SERVER['PHP_SELF']);
+            } else {
+                echo 'ERROR: '.mysqli_error($conn);
+            }   
+        }
+
+        mysqli_close($conn);
+
+    ?>
+
     <header>
 
         <h1>To Do List</h1>
@@ -18,50 +45,34 @@
 
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 
-            <input type="text" name="add" placeholder="eg. Exercise">
-            <button type="submit">Add Item</button>
+            <div class="box">
+                <input type="text" name="item" placeholder="eg. Exercise">
+                <button type="submit" name="submit">Add Item</button>
 
+            </div>
         </form>
+        <?php
+            foreach ($items as $key => $item): 
+        ?>
 
-        <input type="checkbox" name="checked" id="checked-1">
-        <label for="checked-1">
-            <div class="item">
-                <h2>
-                    Example Item
-                </h2>
-                <article>
-                    20 &middot Jan
-                </article>
-                <div class="x">x</div>
-            </div>
-        </label>
+            <input type="checkbox" name="checked" id="checked-<?php $key ?>">
 
-        <input type="checkbox" name="checked" id="checked-2">
-        <label for="checked-2">
-            <div class="item">
-                <h2>
-                    Example Item
-                </h2>
-                <article>
-                    20 &middot Jan
-                </article>
-                <div class="x">x</div>
-            </div>
-        </label>
+            <label for="checked-<?php $key ?>">
+                <div class="item">
+                    <h2>
+                        <?php echo $item['item']; ?>
+                    </h2>
+                    <article>
+                        20 &middot Jan
+                    </article>
+                    <div class="x">x</div>
+                </div>
+            </label>
 
-        <input type="checkbox" name="checked" id="checked-3">
-        <label for="checked-3">
-            <div class="item">
-                <h2>
-                    Example Item
-                </h2>
-                <article>
-                    20 &middot Jan
-                </article>
-                <div class="x">x</div>
-            </div>
-        </label>
-    
+        <?php
+            endforeach;
+        ?>
+
     </main>
 
     <footer>
