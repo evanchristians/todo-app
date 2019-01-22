@@ -15,7 +15,7 @@ header {
 }
 main {
   padding: 3em;
-  max-width: 1024px;
+  max-width: 800px;
   margin: 0 auto;
 }
 
@@ -27,13 +27,13 @@ input[type=text] {
   background: #eee;
   border-radius: 4px;
   transition: all 300ms ease-in-out;
-  width: 50%;
+  width: 40%;
   margin: 2em 0;
 }
 input[type=text]:focus {
   outline: none;
   background: #ddd;
-  width: 100%;
+  width: 60%;
 }
 button {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
