@@ -15,20 +15,31 @@
 
         $result = mysqli_query($conn, $query);
 
-        $items  = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $entries  = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         mysqli_free_result($result);
 
         if(isset($_POST['submit'])) {
-            $i = $_POST['item'];
+            $entry = $_POST['entry'];
 
-            $query_insert = "INSERT INTO todo_test(item) VALUES('$i')";
+            $query_insert = "INSERT INTO todo_test(item) VALUES('$entry')";
 
             if(mysqli_query($conn, $query_insert)){
                 header('Location: '.$_SERVER['PHP_SELF']);
             } else {
                 echo 'ERROR: '.mysqli_error($conn);
             }   
+        }
+
+        if(isset($_POST)) {
+            foreach ($_POST as $i => $remove) {
+                $query_remove = "DELETE FROM todo_test WHERE id = $i";
+                if(mysqli_query($conn, $query_remove)){
+                    header('Location: '.$_SERVER['PHP_SELF']);
+                } else {
+                    echo 'ERROR: '.mysqli_error($conn);
+                }   
+            }
         }
 
         mysqli_close($conn);
@@ -46,32 +57,40 @@
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 
             <div class="box">
-                <input type="text" name="item" placeholder="eg. Exercise">
-                <button type="submit" name="submit">Add Item</button>
+                <input type="text" name="entry" placeholder="eg. Exercise" required>
+                <button type="submit" name="submit">Add Entry</button>
 
             </div>
         </form>
+        <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
+
         <?php
-            foreach ($items as $key => $item): 
+            foreach ($entries as $i => $entry): 
         ?>
 
-            <input type="checkbox" name="checked" id="checked-<?php echo $key ?>">
+            <input type="checkbox" name="<?php echo $entry['id'] ?>" id="checked-<?php echo $i ?>">
 
-            <label for="checked-<?php echo $key ?>">
-                <div class="item">
+            <label for="checked-<?php echo $i ?>">
+                <div class="entry">
                     <h2>
-                        <?php echo $item['item']; ?>
+                        <?php echo $entry['item']; ?>
                     </h2>
                     <article>
                         20 &middot Jan
                     </article>
-                    <div class="x">x</div>
+                    <div class="x">✓</div>
                 </div>
             </label>
 
         <?php
             endforeach;
         ?>
+            <?php if (count($entries) >= 1) { ?>
+
+            <button type="submit" name="remove">Remove Finished</button>
+
+            <?php } ?>
+        </form>      
 
     </main>
 

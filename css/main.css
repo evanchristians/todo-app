@@ -40,24 +40,24 @@ input[type=text]:focus {
 button {
   font-family: 'Raleway', sans-serif;
   font-size: 1.2em;
-  height: fit-content;
+  /* height: fit-content; */
   padding: .5em;
   border: 1px solid #eee;
   border-radius: 4px;
-  background: rgb(59, 183, 255);
+  background: #FF6F59;
   color: #fff;
   white-space: nowrap;
 }
 
 button:hover {
-  background: rgb(50, 164, 230);
+  background: #F46A55;
 
 }
 
 button:focus {
   outline: none;
 }
-.item {
+.entry {
   position: relative;
   background: #eee;
   padding: 1em 2em;
@@ -69,26 +69,29 @@ button:focus {
   font-size: .9em;
 
 }
-.item:hover {
+.entry:hover {
   background: #e4e4e4 !important;
   color: #191919 !important;
 }
 
-.item:hover .x {
+.entry:hover .x {
   opacity: 1;
 }
 
-.item::after {
+.entry::after {
   content: '';
   position: absolute;
   top: 0;
   right: 0;
   height: 100%;
   width: 20px;
-  background: rgb(50, 164, 230);
+  background: #FF6F59;
   transition: all 150ms ease-in-out;
   /* z-index: 1; */
   opacity: .9;
+}
+h1 {
+  color: #aaa;
 }
 h2 {
   margin: 0;
@@ -100,18 +103,18 @@ input[type=checkbox] {
 
 }
 
-input[type=checkbox]:checked + label .item {  
-  color: #999;
+input[type=checkbox]:checked + label .entry {  
+  color: #666;
   text-decoration: line-through;
 }
-input[type=checkbox]:checked + label .item:after {  
-  background: #ff3f3f;
+input[type=checkbox]:checked + label .entry:after {  
+  background: #26d826;
 }
 
 input[type=checkbox]:checked + label .x {  
   /* opacity: 0; */
   /* transform: translate(-50px, -50%); */
-  background: #ff3f3f;
+  background: #26d826;
   opacity: 1 !important;
 }
 
@@ -121,7 +124,7 @@ input[type=checkbox]:checked + label .x {
   right: 25px;
   transform: translate(0, -50%);
   opacity: 0;
-  background: #aaa;
+  /* background: #ddd; */
   border-radius: 50%;
   height: 1.5em;
   width: 1.5em;
@@ -131,10 +134,17 @@ input[type=checkbox]:checked + label .x {
   line-height: 0;
   text-transform: lowercase;
   font-weight: 800;
-  color: #fff;
   transition: all 150ms ease-out;
   z-index: 1;
+  color: #fff;
+  background: #aaa;
+
 }
+
+.x:hover {
+  background: #888;
+}
+
 .box {
   display: flex;
   align-items: center;
