@@ -59,9 +59,9 @@
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 
             <div class="box">
-                <input type="text" name="entry" placeholder="Task name" required>
                 <input type="date" name="due" id="due" value="<?php echo date("Y-m-d");?>">
-                <input type="text" name="details" placeholder="Task description (optional)">
+                <input type="text" name="entry" placeholder="Task name" required autocomplete="off">
+                <input type="text" name="details" placeholder="Task description (optional)" autocomplete="off">
 
                 <div class="add">
                     <button type="submit" name="submit">Add Task</button>
