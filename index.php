@@ -21,8 +21,10 @@
 
         if(isset($_POST['submit'])) {
             $entry = $_POST['entry'];
+            $due = $_POST['due'];
+            $details = $_POST['details'];
 
-            $query_insert = "INSERT INTO todo_test(item) VALUES('$entry')";
+            $query_insert = "INSERT INTO todo_test(item, due, details) VALUES('$entry', '$due', '$details')";
 
             if(mysqli_query($conn, $query_insert)){
                 header('Location: '.$_SERVER['PHP_SELF']);
@@ -57,8 +59,14 @@
         <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post">
 
             <div class="box">
-                <input type="text" name="entry" placeholder="eg. Exercise" required>
-                <button type="submit" name="submit">Add Entry</button>
+                <input type="text" name="entry" placeholder="Task name" required>
+                <input type="date" name="due" id="due" value="<?php echo date("Y-m-d");?>">
+                <input type="text" name="details" placeholder="Task description (optional)">
+
+                <div class="add">
+                    <button type="submit" name="submit">Add Task</button>
+
+                </div>
 
             </div>
         </form>
@@ -75,8 +83,11 @@
                     <h2>
                         <?php echo $entry['item']; ?>
                     </h2>
-                    <article>
-                        20 &middot Jan
+                    <article class="due">
+                        <?php echo date("d M y", strtotime($entry['due']));?>
+                    </article>
+                    <article class = "details">
+                        <?php echo $entry['details']; ?>
                     </article>
                     <div class="x">✓</div>
                 </div>
@@ -87,7 +98,7 @@
         ?>
             <?php if (count($entries) >= 1) { ?>
 
-            <button type="submit" name="remove">Remove Finished</button>
+            <button type="submit" name="remove">Remove Completed Tasks</button>
 
             <?php } ?>
         </form>      
